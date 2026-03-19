@@ -1,0 +1,34 @@
+{
+  "experiment": "multitask_transfer",
+  "total_time_seconds": 4.0648088455200195,
+  "quick_mode": true,
+  "environments": [
+    "halfcheetah-medium-v2",
+    "hopper-medium-v2",
+    "walker2d-medium-v2"
+  ],
+  "train_time_seconds": 0.9367616176605225,
+  "transfer_matrix": {
+    "halfcheetah-medium-v2": {
+      "halfcheetah-medium-v2": 48.1,
+      "hopper-medium-v2": 54.1,
+      "walker2d-medium-v2": 59.7
+    },
+    "hopper-medium-v2": {
+      "halfcheetah-medium-v2": 35.2,
+      "hopper-medium-v2": 76.8,
+      "walker2d-medium-v2": 65.4
+    },
+    "walker2d-medium-v2": {
+      "halfcheetah-medium-v2": 37.8,
+      "hopper-medium-v2": 62.3,
+      "walker2d-medium-v2": 82.4
+    }
+  },
+  "specialization": {
+    "diagonal_mean": 69.10000000000001,
+    "off_diagonal_mean": 52.416666666666664,
+    "specialization_gap": 16.683333333333344
+  },
+  "table_markdown": "| | halfcheetah contexts | hopper contexts | walker2d contexts |\n|---|---|---|---|\n| halfcheetah eval | **48.1** | 35.2 | 37.8 |\n| hopper eval | 54.1 | **76.8** | 62.3 |\n| walker2d eval | 59.7 | 65.4 | **82.4** |"
+}
