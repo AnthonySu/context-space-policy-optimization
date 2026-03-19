@@ -21,6 +21,10 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{wrapfig}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
 
 \newcommand{\cspo}{\textsc{CSPO}}
 \newcommand{\dt}{\textsc{DT}}
@@ -258,6 +262,35 @@ The computational cost of \cspo{} is dominated by the rollout phase. Each epoch 
 For comparison, training a DT from scratch requires 4 GPU-hours on an A100, and fine-tuning adds another 2 GPU-hours. CQL training takes approximately 8 GPU-hours, and Diffuser requires up to 48 GPU-hours. \cspo{} achieves comparable or better results at roughly 0.08 GPU-equivalent-hours, a reduction of $50\times$ or more.
 
 The advantage computation and context selection steps are negligible in cost: sorting $G$ scalars and sampling subsequences from stored trajectories. Memory requirements are also minimal; the entire context library fits in a few kilobytes.
+
+\subsection{Theoretical Properties}
+\label{sec:theory}
+
+We establish two properties of \cspo{} and discuss connections to related optimization frameworks.
+
+\begin{proposition}[Monotonic improvement]
+\label{prop:monotonic}
+Let $\cC_e$ denote the context pool at epoch $e$, and $J(\cC_e) = \max_{c \in \cC_e} \EE[R \mid c]$ the expected return of the best context. Under \cspo{} with top-$K$ selection, $J(\cC_{e+1}) \geq J(\cC_e)$ for all $e \geq 0$.
+\end{proposition}
+
+\begin{proof}
+\cspo{} retains the top-$K$ contexts from epoch $e$ and adds newly sampled candidates at epoch $e+1$. Since the top-$K$ from epoch $e$ are always included in $\cC_{e+1}$, the maximum over $\cC_{e+1}$ is at least as large as the maximum over the retained subset, which equals $J(\cC_e)$.
+\end{proof}
+
+\begin{proposition}[Sample complexity]
+\label{prop:complexity}
+Let $N$ be the number of trajectories in the offline dataset, $G$ the group size, $K$ the selection count, and $E$ the number of epochs. \cspo{} evaluates at most $G \cdot E$ context-policy pairs. Each evaluation requires one forward rollout of the frozen DT (no backward pass). The total compute is $O(G \cdot E \cdot T \cdot d)$ where $T$ is the episode length and $d$ is the DT forward pass cost, compared to $O(N \cdot T \cdot d + B \cdot E_{\text{train}} \cdot d_{\text{back}})$ for DT fine-tuning where $B$ is batch size and $d_{\text{back}} \approx 3d$ includes the backward pass.
+\end{proposition}
+
+\begin{remark}[Connection to \grpo{}]
+\label{rem:grpo}
+\cspo{}'s advantage computation $A_i = (R_i - \bar{R}) / \sigma_R$ mirrors \grpo{}'s group-relative advantage for LLM token sequences. The key difference is the optimization target: \grpo{} updates model parameters $\theta$ via $\nabla_\theta J$, while \cspo{} updates the context set $\cC$ via selection. This makes \cspo{} a zeroth-order optimization method in context space, analogous to evolutionary strategies in parameter space.
+\end{remark}
+
+\begin{remark}[Expressiveness of context-space optimization]
+\label{rem:expressiveness}
+The set of achievable policies under \cspo{} is bounded by the frozen DT's capacity. If the DT has learned a policy $\pi_\theta(a \mid s, c)$ that is insensitive to the context $c$, then no context optimization can improve performance. Empirically, we observe that DTs trained on diverse datasets exhibit strong context sensitivity (Section~\ref{sec:context_analysis}), making context-space optimization effective.
+\end{remark}
 
 
 % ==============================================================
