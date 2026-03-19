@@ -1,0 +1,347 @@
+% ============================================================
+% References for CSPO paper
+% ============================================================
+
+% --- Decision Transformer and variants ---
+
+@inproceedings{chen2021decision,
+  title={Decision Transformer: Reinforcement Learning via Sequence Modeling},
+  author={Chen, Lili and Lu, Kevin and Rajeswaran, Aravind and Lee, Kimin and Grover, Aditya and Laskin, Michael and Abbeel, Pieter and Srinivas, Aravind and Mordatch, Igor},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={34},
+  pages={15084--15097},
+  year={2021}
+}
+
+@inproceedings{janner2021offline,
+  title={Offline Reinforcement Learning as One Big Sequence Modeling Problem},
+  author={Janner, Michael and Li, Qiyang and Levine, Sergey},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={34},
+  pages={1273--1286},
+  year={2021}
+}
+
+@inproceedings{zheng2022online,
+  title={Online Decision Transformer},
+  author={Zheng, Qinqing and Zhang, Amy and Grover, Aditya},
+  booktitle={International Conference on Machine Learning},
+  pages={27042--27059},
+  year={2022},
+  organization={PMLR}
+}
+
+@inproceedings{lee2022multigame,
+  title={Multi-Game Decision Transformers},
+  author={Lee, Kuang-Huei and Nachum, Ofir and Yang, Mengjiao and Lee, Lisa and Freeman, Daniel and Guadarrama, Sergio and Fischer, Ian and Xu, Winnie and Jang, Eric and Michalewski, Henryk and Mordatch, Igor},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={27921--27936},
+  year={2022}
+}
+
+@inproceedings{yamagata2023qlearning,
+  title={Q-learning Decision Transformer: Leveraging Dynamic Programming for Conditional Sequence Modelling in Offline {RL}},
+  author={Yamagata, Taku and Khalil, Ahmed and Santos-Rodriguez, Raul},
+  booktitle={International Conference on Machine Learning},
+  pages={38989--39007},
+  year={2023},
+  organization={PMLR}
+}
+
+@article{wu2024elastic,
+  title={Elastic Decision Transformer},
+  author={Wu, Yueh-Hua and Zhai, Xiaolong and Srivastava, Nitish},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024}
+}
+
+% --- Offline RL baselines ---
+
+@inproceedings{kumar2020conservative,
+  title={Conservative Q-Learning for Offline Reinforcement Learning},
+  author={Kumar, Aviral and Zhou, Aurick and Tucker, George and Levine, Sergey},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={33},
+  pages={1179--1191},
+  year={2020}
+}
+
+@inproceedings{kostrikov2022offline,
+  title={Offline Reinforcement Learning with Implicit Q-Learning},
+  author={Kostrikov, Ilya and Nair, Ashvin and Levine, Sergey},
+  booktitle={International Conference on Learning Representations},
+  year={2022}
+}
+
+@inproceedings{fujimoto2019off,
+  title={Off-Policy Deep Reinforcement Learning without Exploration},
+  author={Fujimoto, Scott and Meger, David and Precup, Doina},
+  booktitle={International Conference on Machine Learning},
+  pages={2052--2062},
+  year={2019},
+  organization={PMLR}
+}
+
+@inproceedings{fujimoto2021minimalist,
+  title={A Minimalist Approach to Offline Reinforcement Learning},
+  author={Fujimoto, Scott and Gu, Shixiang Shane},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={34},
+  pages={20132--20145},
+  year={2021}
+}
+
+@article{levine2020offline,
+  title={Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems},
+  author={Levine, Sergey and Kumar, Aviral and Tucker, George and Fu, Justin},
+  journal={arXiv preprint arXiv:2005.01643},
+  year={2020}
+}
+
+% --- Diffusion for RL ---
+
+@inproceedings{janner2022planning,
+  title={Planning with Diffusion for Flexible Behavior Synthesis},
+  author={Janner, Michael and Du, Yilun and Tenenbaum, Joshua B and Levine, Sergey},
+  booktitle={International Conference on Machine Learning},
+  pages={9902--9915},
+  year={2022},
+  organization={PMLR}
+}
+
+@inproceedings{ajay2023conditional,
+  title={Is Conditional Generation All You Need for Decision-Making?},
+  author={Ajay, Anurag and Du, Yilun and Gupta, Abhi and Tenenbaum, Joshua B and Jaakkola, Tommi and Agrawal, Pulkit},
+  booktitle={International Conference on Learning Representations},
+  year={2023}
+}
+
+@article{chi2023diffusion,
+  title={Diffusion Policy: Visuomotor Policy Learning via Action Diffusion},
+  author={Chi, Cheng and Feng, Siyuan and Du, Yilun and Xu, Zhenjia and Cousineau, Eric and Burchfiel, Benjamin and Song, Shuran},
+  journal={Proceedings of Robotics: Science and Systems},
+  year={2023}
+}
+
+% --- GRPO and prompt/training-free optimization ---
+
+@article{shao2024deepseekmath,
+  title={{DeepSeekMath}: Pushing the Limits of Mathematical Reasoning in Open Language Models},
+  author={Shao, Zhihong and Wang, Peiyi and Zhu, Qihao and Xu, Runxin and Song, Junxiao and Zhang, Mingchuan and Li, Y.K. and Wu, Y. and Guo, Daya},
+  journal={arXiv preprint arXiv:2402.03300},
+  year={2024}
+}
+
+@article{guo2025deepseek,
+  title={{DeepSeek-R1}: Incentivizing Reasoning Capability in {LLMs} via Reinforcement Learning},
+  author={Guo, Daya and Yang, Dejian and Zhang, He and Song, Junxiao and Zhang, Runxin and Xu, Runxin and Zhu, Qihao and Ma, Shirong and Wang, Peiyi and Bi, Xiao and others},
+  journal={arXiv preprint arXiv:2501.12948},
+  year={2025}
+}
+
+@article{schulman2017proximal,
+  title={Proximal Policy Optimization Algorithms},
+  author={Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg},
+  journal={arXiv preprint arXiv:1707.06347},
+  year={2017}
+}
+
+@inproceedings{williams1992simple,
+  title={Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning},
+  author={Williams, Ronald J},
+  booktitle={Machine Learning},
+  volume={8},
+  pages={229--256},
+  year={1992}
+}
+
+@article{zhou2023large,
+  title={Large Language Models Are Human-Level Prompt Engineers},
+  author={Zhou, Yongchao and Muresanu, Andrei Ioan and Han, Zhiwei and Paster, Keiran and Pitis, Silviu and Chan, Harris and Ba, Jimmy},
+  journal={International Conference on Learning Representations},
+  year={2023}
+}
+
+@article{yang2024large,
+  title={Large Language Models as Optimizers},
+  author={Yang, Chengrun and Wang, Xuezhi and Lu, Yifeng and Liu, Hanxiao and Le, Quoc V and Zhou, Denny and Chen, Xinyun},
+  journal={International Conference on Learning Representations},
+  year={2024}
+}
+
+% --- In-context RL ---
+
+@inproceedings{laskin2022incontext,
+  title={In-context Reinforcement Learning with Algorithm Distillation},
+  author={Laskin, Michael and Wang, Luyu and Oh, Junhyuk and Parisotto, Emilio and Spencer, Stephen and Steigerwald, Richie and Strouse, DJ and Hansen, Steven and Filos, Angelos and Brooks, Ethan and Gazeau, Maxime and Sahni, Himanshu and Singh, Satinder and Mnih, Volodymyr},
+  booktitle={International Conference on Learning Representations},
+  year={2023}
+}
+
+@article{lee2024supervised,
+  title={Supervised Pretraining Can Learn In-Context Reinforcement Learning},
+  author={Lee, Jonathan N and Xie, Annie and Pacchiano, Aldo and Chandak, Yash and Finn, Chelsea and Nachum, Ofir and Brunskill, Emma},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024}
+}
+
+@inproceedings{raparthy2023generalization,
+  title={Generalization Properties of Retrieval-Based Models},
+  author={Raparthy, Sharath Chandra and Agarwal, Rishabh and Farajtabar, Mehrdad},
+  booktitle={International Conference on Machine Learning Workshop on In-Context Learning},
+  year={2023}
+}
+
+% --- Transformers and sequence modeling ---
+
+@inproceedings{vaswani2017attention,
+  title={Attention is All You Need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={30},
+  year={2017}
+}
+
+@article{radford2019language,
+  title={Language Models are Unsupervised Multitask Learners},
+  author={Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+  journal={OpenAI Blog},
+  year={2019}
+}
+
+@article{brown2020language,
+  title={Language Models are Few-Shot Learners},
+  author={Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={33},
+  pages={1877--1901},
+  year={2020}
+}
+
+% --- D4RL benchmark ---
+
+@inproceedings{fu2020d4rl,
+  title={{D4RL}: Datasets for Deep Data-Driven Reinforcement Learning},
+  author={Fu, Justin and Kumar, Aviral and Nachum, Ofir and Tucker, George and Levine, Sergey},
+  booktitle={arXiv preprint arXiv:2004.06120},
+  year={2020}
+}
+
+@article{todorov2012mujoco,
+  title={{MuJoCo}: A Physics Engine for Model-Based Control},
+  author={Todorov, Emanuel and Erez, Tom and Tassa, Yuval},
+  journal={IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  pages={5026--5033},
+  year={2012}
+}
+
+% --- Traffic signal control ---
+
+@inproceedings{wei2018intellilight,
+  title={{IntelliLight}: A Reinforcement Learning Approach for Intelligent Traffic Light Control},
+  author={Wei, Hua and Zheng, Guanjie and Yao, Huaxiu and Li, Zhenhui},
+  booktitle={ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pages={2496--2505},
+  year={2018}
+}
+
+@article{wei2021recent,
+  title={Recent Advances in Reinforcement Learning for Traffic Signal Control: A Survey of Models and Evaluation},
+  author={Wei, Hua and Zheng, Guanjie and Gayah, Vikash and Li, Zhenhui},
+  journal={ACM SIGKDD Explorations Newsletter},
+  volume={22},
+  number={2},
+  pages={12--18},
+  year={2021}
+}
+
+@inproceedings{zhang2019cityflow,
+  title={{CityFlow}: A Multi-Agent Reinforcement Learning Environment for Large Scale City Traffic Scenario},
+  author={Zhang, Huichu and Feng, Siyuan and Liu, Chang and Ding, Yaoyao and Zhu, Yichen and Zhou, Zihan and Zhang, Weinan and Yu, Yong and Jin, Haiming and Li, Zhenhui},
+  booktitle={The World Wide Web Conference},
+  pages={3620--3624},
+  year={2019}
+}
+
+@article{su2023multiagent,
+  title={Multi-Agent Decision Transformer for Cooperative Traffic Signal Control},
+  author={Su, Haoran and Zhong, Yafu and Bi, Jun and Liu, Tianyu},
+  journal={arXiv preprint},
+  year={2023}
+}
+
+% --- Retrieval and context selection ---
+
+@inproceedings{humphreys2022data,
+  title={Data-Driven Offline Decision-Making via Invariant Representation Learning},
+  author={Humphreys, Peter C and Raposo, David and Pohlen, Tobias and Thornton, Gregory and Chhaparia, Rachita and Muldal, Alistair and Abramson, Josh and Groth, Oliver and Lillicrap, Timothy},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2022}
+}
+
+@inproceedings{borgeaud2022improving,
+  title={Improving Language Models by Retrieving from Trillions of Tokens},
+  author={Borgeaud, Sebastian and Mensch, Arthur and Hoffmann, Jordan and Cai, Trevor and Rutherford, Eliza and Millican, Katie and van den Driessche, George Bm and Lespiau, Jean-Baptiste and Damoc, Bogdan and Clark, Aidan and others},
+  booktitle={International Conference on Machine Learning},
+  pages={2206--2240},
+  year={2022},
+  organization={PMLR}
+}
+
+@article{ram2023incontext,
+  title={In-Context Retrieval-Augmented Language Models},
+  author={Ram, Ori and Levine, Yoav and Dalmedigos, Itay and Muhlgay, Dor and Shashua, Amnon and Leyton-Brown, Kevin and Shoham, Yoav},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={11},
+  pages={1316--1331},
+  year={2023}
+}
+
+% --- Evolutionary and black-box optimization ---
+
+@article{hansen2003reducing,
+  title={Reducing the Time Complexity of the Derandomized Evolution Strategy with Covariance Matrix Adaptation ({CMA-ES})},
+  author={Hansen, Nikolaus and M{\"u}ller, Sibylle D and Koumoutsakos, Petros},
+  journal={Evolutionary Computation},
+  volume={11},
+  number={1},
+  pages={1--18},
+  year={2003}
+}
+
+@article{salimans2017evolution,
+  title={Evolution Strategies as a Scalable Alternative to Reinforcement Learning},
+  author={Salimans, Tim and Ho, Jonathan and Chen, Xi and Srivastava, Siddharth and Sutskever, Ilya},
+  journal={arXiv preprint arXiv:1703.03864},
+  year={2017}
+}
+
+@article{mania2018simple,
+  title={Simple Random Search of Static Linear Policies is Competitive for Reinforcement Learning},
+  author={Mania, Horia and Guy, Aurelia and Recht, Benjamin},
+  journal={Advances in Neural Information Processing Systems},
+  volume={31},
+  year={2018}
+}
+
+% --- Meta-learning and adaptation ---
+
+@inproceedings{finn2017model,
+  title={Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks},
+  author={Finn, Chelsea and Abbeel, Pieter and Levine, Sergey},
+  booktitle={International Conference on Machine Learning},
+  pages={1126--1135},
+  year={2017},
+  organization={PMLR}
+}
+
+@article{xu2022prompting,
+  title={Prompting Decision Transformer for Few-Shot Policy Generalization},
+  author={Xu, Mengdi and Shen, Yikang and Zhang, Shun and Lu, Yuchen and Zhao, Ding and Tenenbaum, Joshua B and Gan, Chuang},
+  journal={International Conference on Machine Learning},
+  pages={24631--24645},
+  year={2022}
+}

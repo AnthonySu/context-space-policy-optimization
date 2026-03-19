@@ -1,0 +1,87 @@
+% neurips_2025.sty - Style file for NeurIPS 2025
+% Based on the standard NeurIPS style
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_2025}[2025/01/01 NeurIPS 2025 style]
+
+\RequirePackage{xkeyval}
+
+% Options
+\newif\if@neuripsfinal\@neuripsfinalfalse
+\DeclareOptionX{final}{\@neuripsfinaltrue}
+\DeclareOptionX{preprint}{\@neuripsfinalfalse}
+\ProcessOptionsX
+
+% Page layout
+\RequirePackage[letterpaper,
+  textwidth=6.5in,
+  textheight=9in,
+  top=1in,
+  headheight=0pt,
+  headsep=0pt,
+  footskip=0.5in]{geometry}
+
+% Fonts and spacing
+\RequirePackage{times}
+\RequirePackage{natbib}
+\setlength{\bibsep}{2pt plus 0.5pt minus 0.5pt}
+
+% Paragraph and line spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.5pt plus 1pt minus 1pt}
+\renewcommand{\baselinestretch}{1.0}
+
+% Section formatting
+\RequirePackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+
+% Title and author formatting
+\def\@maketitle{%
+  \begin{center}%
+    {\LARGE\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+
+% Abstract formatting
+\renewenvironment{abstract}{%
+  \centerline{\large\bfseries Abstract}%
+  \vspace{0.5em}%
+  \begin{quote}\small
+}{%
+  \end{quote}%
+  \vspace{1em}
+}
+
+% \And command for multiple authors
+\newcommand{\And}{%
+  \end{tabular}\hfil\linebreak[0]\hfil%
+  \begin{tabular}[t]{c}%
+}
+
+% Hyperref settings
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{
+      colorlinks=true,
+      linkcolor=red!60!black,
+      citecolor=green!50!black,
+      urlcolor=blue!60!black,
+    }%
+  }{}%
+}
+
+\endinput
