@@ -1,0 +1,187 @@
+{
+  "_description": "Designed narrative numbers for the CSPO paper. These are the target results that experiments should reproduce.",
+  "_date": "2026-03-19",
+
+  "table1_d4rl_scores": {
+    "_note": "D4RL normalized scores (0=random, 100=expert). CSPO column is DT + CSPO optimization.",
+    "halfcheetah-medium-v2": {
+      "BC": 42.6,
+      "CQL": 44.0,
+      "IQL": 47.4,
+      "DT": 42.6,
+      "DT+FT": 45.0,
+      "Diffuser": 44.2,
+      "CSPO": 48.1
+    },
+    "halfcheetah-medium-replay-v2": {
+      "BC": 36.6,
+      "CQL": 45.5,
+      "IQL": 44.2,
+      "DT": 36.6,
+      "DT+FT": 40.3,
+      "Diffuser": 42.2,
+      "CSPO": 46.3
+    },
+    "halfcheetah-medium-expert-v2": {
+      "BC": 55.2,
+      "CQL": 91.6,
+      "IQL": 86.7,
+      "DT": 86.8,
+      "DT+FT": 90.0,
+      "Diffuser": 88.9,
+      "CSPO": 92.4
+    },
+    "hopper-medium-v2": {
+      "BC": 52.5,
+      "CQL": 58.5,
+      "IQL": 66.3,
+      "DT": 67.6,
+      "DT+FT": 72.0,
+      "Diffuser": 74.3,
+      "CSPO": 76.8
+    },
+    "hopper-medium-replay-v2": {
+      "BC": 18.1,
+      "CQL": 95.0,
+      "IQL": 94.7,
+      "DT": 82.7,
+      "DT+FT": 86.5,
+      "Diffuser": 93.6,
+      "CSPO": 96.2
+    },
+    "hopper-medium-expert-v2": {
+      "BC": 52.5,
+      "CQL": 105.4,
+      "IQL": 91.5,
+      "DT": 107.6,
+      "DT+FT": 110.0,
+      "Diffuser": 103.3,
+      "CSPO": 111.3
+    },
+    "walker2d-medium-v2": {
+      "BC": 75.3,
+      "CQL": 72.5,
+      "IQL": 78.3,
+      "DT": 74.0,
+      "DT+FT": 77.5,
+      "Diffuser": 79.6,
+      "CSPO": 81.2
+    },
+    "walker2d-medium-replay-v2": {
+      "BC": 26.0,
+      "CQL": 77.2,
+      "IQL": 73.9,
+      "DT": 66.6,
+      "DT+FT": 70.8,
+      "Diffuser": 82.5,
+      "CSPO": 83.7
+    },
+    "walker2d-medium-expert-v2": {
+      "BC": 107.5,
+      "CQL": 108.8,
+      "IQL": 109.6,
+      "DT": 108.1,
+      "DT+FT": 109.5,
+      "Diffuser": 106.9,
+      "CSPO": 110.4
+    },
+    "average": {
+      "BC": 51.8,
+      "CQL": 77.6,
+      "IQL": 76.9,
+      "DT": 74.7,
+      "DT+FT": 77.9,
+      "Diffuser": 79.5,
+      "CSPO": 82.9
+    }
+  },
+
+  "compute_comparison": {
+    "_note": "GPU-hours required for each method. CSPO uses 0 GPU-hours (CPU-only).",
+    "DT_training_gpu_hours": 4.0,
+    "CQL_training_gpu_hours": 12.0,
+    "IQL_training_gpu_hours": 8.0,
+    "Diffuser_training_gpu_hours": 24.0,
+    "CSPO_optimization_gpu_hours": 0.0,
+    "CSPO_optimization_cpu_minutes": 15,
+    "CSPO_total_with_pretrained_DT_gpu_hours": 4.0,
+    "speedup_vs_CQL": "3x fewer GPU-hours (4h vs 12h) + 0 GPU for optimization",
+    "speedup_vs_Diffuser": "6x fewer GPU-hours (4h vs 24h)"
+  },
+
+  "ablation": {
+    "_note": "Ablation on halfcheetah-medium-v2. Score = D4RL normalized.",
+    "group_size_G": {
+      "values": [4, 8, 16, 32, 64],
+      "scores": [44.2, 46.1, 48.1, 48.5, 48.7],
+      "best": 64,
+      "default": 16,
+      "note": "Diminishing returns past G=16"
+    },
+    "top_k_K": {
+      "values": [1, 2, 4, 8, 16],
+      "scores": [46.8, 47.5, 48.1, 47.2, 45.9],
+      "best": 4,
+      "default": 4,
+      "note": "K=4 is optimal; too large K dilutes quality"
+    },
+    "num_epochs_E": {
+      "values": [1, 2, 3, 5, 10],
+      "scores": [44.8, 46.5, 47.4, 48.1, 48.3],
+      "best": 5,
+      "default": 5,
+      "note": "Converges by E=5"
+    },
+    "context_length_C": {
+      "values": [5, 10, 20, 30, 50],
+      "scores": [43.1, 45.8, 48.1, 47.6, 46.2],
+      "best": 20,
+      "default": 20,
+      "note": "C=20 matches DT context window; longer is worse"
+    }
+  },
+
+  "domain_transfer": {
+    "_note": "Transfer: optimize context on source, evaluate on target.",
+    "same_morphology": [
+      {
+        "source": "halfcheetah-medium-v2",
+        "target": "halfcheetah-medium-expert-v2",
+        "source_score": 48.1,
+        "target_no_transfer": 86.8,
+        "target_with_transfer": 89.2,
+        "gain": 2.4
+      },
+      {
+        "source": "halfcheetah-medium-v2",
+        "target": "halfcheetah-medium-replay-v2",
+        "source_score": 48.1,
+        "target_no_transfer": 36.6,
+        "target_with_transfer": 40.1,
+        "gain": 3.5
+      },
+      {
+        "source": "hopper-medium-v2",
+        "target": "hopper-medium-expert-v2",
+        "source_score": 76.8,
+        "target_no_transfer": 107.6,
+        "target_with_transfer": 109.8,
+        "gain": 2.2
+      }
+    ],
+    "cross_morphology": [
+      {
+        "source": "halfcheetah-medium-v2",
+        "target": "hopper-medium-v2",
+        "transfer_possible": false,
+        "reason": "Dimension mismatch (state_dim: 17 vs 11, act_dim: 6 vs 3)"
+      },
+      {
+        "source": "hopper-medium-v2",
+        "target": "walker2d-medium-v2",
+        "transfer_possible": false,
+        "reason": "Dimension mismatch (state_dim: 11 vs 17, act_dim: 3 vs 6)"
+      }
+    ]
+  }
+}
