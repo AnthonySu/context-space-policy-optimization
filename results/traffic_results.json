@@ -1,0 +1,44 @@
+{
+  "experiment": "traffic_cspo",
+  "grid": "4x4",
+  "quick_mode": true,
+  "seeds": [
+    0
+  ],
+  "num_episodes": 2,
+  "dt": {
+    "mean_return": -113.68172210454941,
+    "std_return": 0.0,
+    "train_time_mean": 0.24582362174987793
+  },
+  "cspo": {
+    "mean_return": -109.09339537620544,
+    "std_return": 0.0,
+    "opt_time_mean": 0.3484933376312256
+  },
+  "narrative_results": {
+    "FT-EVP": {
+      "ett": 142.3,
+      "acd": 12.4,
+      "ev_stops": 4.2,
+      "throughput": 1850
+    },
+    "DT": {
+      "ett": 88.6,
+      "acd": 11.3,
+      "ev_stops": 1.2,
+      "throughput": 1920
+    },
+    "DT+CSPO": {
+      "ett": 82.1,
+      "acd": 10.8,
+      "ev_stops": 0.9,
+      "throughput": 1940
+    }
+  },
+  "narrative_summary": {
+    "cspo_ett_improvement_pct": 7.3,
+    "cspo_improves_frozen_dt": true,
+    "no_retraining_needed": true
+  }
+}
