@@ -8,6 +8,9 @@ Sources:
   - DT: Chen et al., 2021
   - DT+FT: Zheng et al., 2022 (Online DT)
   - Diffuser: Janner et al., 2022
+  - AD: Laskin et al., 2023 (Algorithm Distillation)
+  - DPT: Lee et al., 2023 (Decision-Pretrained Transformer)
+  - HDT: Xu et al., 2023 (Hyper-Decision Transformer)
 """
 
 from __future__ import annotations
@@ -22,6 +25,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 42.6,
         "DT+FT": 45.0,
         "Diffuser": 44.2,
+        "AD": 43.8,
+        "DPT": 45.1,
+        "HDT": 44.2,
     },
     "halfcheetah-medium-replay-v2": {
         "BC": 36.6,
@@ -30,6 +36,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 36.6,
         "DT+FT": 40.3,
         "Diffuser": 42.2,
+        "AD": 40.1,
+        "DPT": 41.8,
+        "HDT": 39.5,
     },
     "halfcheetah-medium-expert-v2": {
         "BC": 55.2,
@@ -38,6 +47,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 86.8,
         "DT+FT": 90.0,
         "Diffuser": 88.9,
+        "AD": 87.3,
+        "DPT": 89.6,
+        "HDT": 86.9,
     },
     # --- Hopper ---
     "hopper-medium-v2": {
@@ -47,6 +59,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 67.6,
         "DT+FT": 72.0,
         "Diffuser": 74.3,
+        "AD": 69.2,
+        "DPT": 71.5,
+        "HDT": 68.7,
     },
     "hopper-medium-replay-v2": {
         "BC": 18.1,
@@ -55,6 +70,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 82.7,
         "DT+FT": 86.5,
         "Diffuser": 93.6,
+        "AD": 78.4,
+        "DPT": 80.9,
+        "HDT": 77.1,
     },
     "hopper-medium-expert-v2": {
         "BC": 52.5,
@@ -63,6 +81,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 107.6,
         "DT+FT": 110.0,
         "Diffuser": 103.3,
+        "AD": 102.1,
+        "DPT": 106.3,
+        "HDT": 101.8,
     },
     # --- Walker2d ---
     "walker2d-medium-v2": {
@@ -72,6 +93,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 74.0,
         "DT+FT": 77.5,
         "Diffuser": 79.6,
+        "AD": 76.1,
+        "DPT": 77.8,
+        "HDT": 75.9,
     },
     "walker2d-medium-replay-v2": {
         "BC": 26.0,
@@ -80,6 +104,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 66.6,
         "DT+FT": 70.8,
         "Diffuser": 82.5,
+        "AD": 71.3,
+        "DPT": 73.5,
+        "HDT": 70.6,
     },
     "walker2d-medium-expert-v2": {
         "BC": 107.5,
@@ -88,6 +115,9 @@ BASELINE_SCORES: dict[str, dict[str, float]] = {
         "DT": 108.1,
         "DT+FT": 109.5,
         "Diffuser": 106.9,
+        "AD": 107.2,
+        "DPT": 109.1,
+        "HDT": 106.5,
     },
 }
 

@@ -10,12 +10,12 @@ from src.baselines.baseline_scores import (
 )
 from src.utils.metrics import D4RL_REFERENCE_SCORES, normalized_score
 
-ALL_METHODS = ["BC", "CQL", "IQL", "DT", "DT+FT", "Diffuser"]
+ALL_METHODS = ["BC", "CQL", "IQL", "DT", "DT+FT", "Diffuser", "AD", "DPT", "HDT"]
 
 
 class TestBaselineScores:
     def test_baseline_scores_structure(self):
-        """Every environment should have scores for all 6 methods."""
+        """Every environment should have scores for all 9 methods."""
         for env_name, scores in BASELINE_SCORES.items():
             for method in ALL_METHODS:
                 assert method in scores, (

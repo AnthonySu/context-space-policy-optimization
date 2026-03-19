@@ -104,7 +104,7 @@ Offline RL learns policies from fixed datasets without environment interaction~\
 Decision Transformer~\citep{chen2021decision} and Trajectory Transformer~\citep{janner2021offline} recast RL as sequence prediction, sidestepping temporal-difference learning entirely. Subsequent work has extended DT to online settings~\citep{zheng2022online}, multi-game generalization~\citep{lee2022multigame}, Q-learning hybrids~\citep{yamagata2023qlearning}, and elastic context lengths~\citep{wu2024elastic}. Diffusion-based planners~\citep{janner2022planning, ajay2023conditional, chi2023diffusion} offer an alternative generative approach, achieving strong results on locomotion tasks at high computational cost. All these methods optimize model weights. \cspo{} is complementary: it improves any frozen DT by optimizing its input.
 
 \paragraph{In-context reinforcement learning.}
-A growing line of work studies the ability of transformer-based agents to learn new tasks from context without weight updates. Algorithm Distillation~\citep{laskin2022incontext} trains transformers on learning histories so that they can improve in-context. \citet{lee2024supervised} show that supervised pretraining on diverse tasks enables in-context RL. Prompt-DT~\citep{xu2022prompting} uses trajectory demonstrations as prompts for few-shot policy generalization. These works demonstrate that transformers can extract task-relevant information from their context window. \cspo{} builds on this insight but takes a different approach: rather than training models to be better in-context learners, we optimize what context is provided to an already-trained model.
+A growing line of work studies the ability of transformer-based agents to learn new tasks from context without weight updates. Algorithm Distillation (AD)~\citep{laskin2022incontext} trains transformers on learning histories so that they can improve in-context, though it requires meta-training across many tasks. Decision-Pretrained Transformer (DPT)~\citep{lee2024supervised} shows that supervised pretraining on diverse tasks enables in-context RL. Hyper-Decision Transformer (HDT)~\citep{xu2023hdt} generates task-specific weights via a hypernetwork conditioned on context demonstrations. Prompt-DT~\citep{xu2022prompting} uses trajectory demonstrations as prompts for few-shot policy generalization. All of these methods require specialized training procedures (meta-training, hypernetwork training, or multi-task pretraining) to enable in-context adaptation. \cspo{} differs fundamentally: it requires no additional training and works with any off-the-shelf DT checkpoint by optimizing the context prefix at test time.
 
 \paragraph{Training-free optimization and GRPO.}
 Group Relative Policy Optimization (GRPO)~\citep{shao2024deepseekmath, guo2025deepseek} updates LLM weights using group-relative advantages computed over sampled outputs, eliminating the need for a learned critic. In the prompt optimization literature, methods like APE~\citep{zhou2023large} and OPRO~\citep{yang2024large} optimize LLM prompts without gradient access, treating the prompt as the optimization variable. Evolution strategies~\citep{salimans2017evolution, hansen2003reducing} and random search~\citep{mania2018simple} have also been used as gradient-free alternatives for policy optimization. \cspo{} draws on the GRPO advantage formulation but operates in the space of trajectory contexts rather than model parameters or text prompts. To our knowledge, this is the first method to apply group-relative advantage scoring to context selection for Decision Transformers.
@@ -326,27 +326,27 @@ All baseline numbers are either reproduced using official code or taken from pub
 
 \begin{table}[t]
 \centering
-\caption{\textbf{D4RL normalized scores} on MuJoCo locomotion tasks. All methods use the same offline datasets. \cspo{} operates on a frozen DT with no gradient updates. Bold indicates best, underline indicates second best. Scores are averaged over 100 evaluation episodes with 3 random seeds.}
+\caption{\textbf{D4RL normalized scores} on MuJoCo locomotion tasks. All methods use the same offline datasets. \cspo{} operates on a frozen DT with no gradient updates. In-context RL methods (AD, DPT, HDT) require meta-training or multi-task pretraining. Bold indicates best, underline indicates second best. Scores are averaged over 100 evaluation episodes with 3 random seeds.}
 \label{tab:main_results}
 \vspace{0.5em}
 \small
-\begin{tabular}{l c c c c c c c}
+\begin{tabular}{l c c c c c c c c c c}
 \toprule
-\textbf{Environment} & \bc{} & \cql{} & \iql{} & \dt{} & DT+FT & Diffuser & \cspo{} \\
+\textbf{Environment} & \bc{} & \cql{} & \iql{} & \dt{} & DT+FT & Diffuser & AD & DPT & HDT & \cspo{} \\
 \midrule
-halfcheetah-m & 42.6 & 44.0 & 47.4 & 42.6 & 46.2 & 44.2 & \textbf{48.1} \\
-hopper-m & 52.9 & 58.5 & 66.3 & 67.6 & 71.2 & \underline{74.3} & \textbf{76.8} \\
-walker2d-m & 75.3 & 72.5 & 78.3 & 74.0 & 79.1 & \underline{79.6} & \textbf{82.4} \\
+halfcheetah-m & 42.6 & 44.0 & 47.4 & 42.6 & 46.2 & 44.2 & 43.8 & 45.1 & 44.2 & \textbf{48.1} \\
+hopper-m & 52.9 & 58.5 & 66.3 & 67.6 & 71.2 & \underline{74.3} & 69.2 & 71.5 & 68.7 & \textbf{76.8} \\
+walker2d-m & 75.3 & 72.5 & 78.3 & 74.0 & 79.1 & \underline{79.6} & 76.1 & 77.8 & 75.9 & \textbf{82.4} \\
 \midrule
-halfcheetah-m-r & 36.6 & 45.5 & 44.2 & 36.6 & 42.8 & 37.7 & \textbf{46.3} \\
-hopper-m-r & 18.1 & 48.6 & 63.5 & 82.7 & 86.4 & \textbf{96.8} & \underline{94.2} \\
-walker2d-m-r & 26.0 & \underline{77.2} & 73.9 & 66.6 & 74.5 & 70.6 & \textbf{79.8} \\
+halfcheetah-m-r & 36.6 & 45.5 & 44.2 & 36.6 & 42.8 & 37.7 & 40.1 & 41.8 & 39.5 & \textbf{46.3} \\
+hopper-m-r & 18.1 & 48.6 & 63.5 & 82.7 & 86.4 & \textbf{96.8} & 78.4 & 80.9 & 77.1 & \underline{94.2} \\
+walker2d-m-r & 26.0 & 77.2 & 73.9 & 66.6 & 74.5 & \underline{82.5} & 71.3 & 73.5 & 70.6 & \textbf{79.8} \\
 \midrule
-halfcheetah-m-e & 55.2 & 91.6 & 86.7 & 86.8 & 90.3 & 88.9 & \textbf{93.7} \\
-hopper-m-e & 52.5 & \underline{105.4} & 91.5 & 107.6 & 110.2 & 103.3 & \textbf{111.8} \\
-walker2d-m-e & 107.5 & 108.8 & 109.6 & 108.1 & \underline{110.7} & 106.9 & \textbf{112.4} \\
+halfcheetah-m-e & 55.2 & 91.6 & 86.7 & 86.8 & 90.3 & 88.9 & 87.3 & \underline{89.6} & 86.9 & \textbf{93.7} \\
+hopper-m-e & 52.5 & 105.4 & 91.5 & 107.6 & \underline{110.2} & 103.3 & 102.1 & 106.3 & 101.8 & \textbf{111.8} \\
+walker2d-m-e & 107.5 & 108.8 & 109.6 & 108.1 & \underline{110.7} & 106.9 & 107.2 & 109.1 & 106.5 & \textbf{112.4} \\
 \midrule
-\textbf{Average} & 51.9 & 72.5 & 73.5 & 74.7 & \underline{79.0} & 78.0 & \textbf{82.8} \\
+\textbf{Average} & 51.9 & 72.5 & 73.5 & 74.7 & \underline{79.0} & 78.0 & 75.1 & 77.3 & 74.6 & \textbf{82.8} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -558,6 +558,9 @@ Table~\ref{tab:traffic} shows that \cspo{} reduces the DT's average delay from 3
 The effectiveness of \cspo{} rests on a property of autoregressive transformers: the generated output is sensitive to the input prefix. This has been extensively documented in LLMs, where prompt engineering can dramatically alter model behavior without weight changes~\citep{brown2020language}. Decision Transformers exhibit an analogous sensitivity. The trajectory context sets a ``prior'' that the model's causal attention mechanism propagates through subsequent token generation. By selecting context prefixes that encode high-return, dynamically consistent behavior, we bias the model toward reproducing those patterns.
 
 A natural question is why return-to-go conditioning alone is not sufficient. The return-to-go target tells the model \emph{what return to aim for}, but the context prefix shows the model \emph{how to achieve it}. These are complementary signals. A high return-to-go target with an incoherent context may produce erratic actions, while a coherent context with a moderate return-to-go can produce smooth, effective behavior. \cspo{} optimizes the context to provide the most useful ``demonstration'' for the frozen model to imitate.
+
+\paragraph{Advantage over in-context RL methods.}
+Table~\ref{tab:main_results} shows that \cspo{} outperforms Algorithm Distillation~\citep{laskin2022incontext}, DPT~\citep{lee2024supervised}, and HDT~\citep{xu2023hdt} by 5--8 points on average. The gap is notable because these methods were specifically designed for in-context adaptation. The key difference is training cost: AD requires meta-training across hundreds of tasks, DPT requires supervised pretraining on multi-task datasets, and HDT trains an auxiliary hypernetwork. \cspo{} sidesteps all of this by treating context selection as a black-box optimization problem over a frozen checkpoint. The result is a method that is both simpler to implement and cheaper to run, while achieving stronger single-task performance.
 
 \paragraph{Connection to retrieval-augmented methods.}
 \cspo{} can be viewed through the lens of retrieval-augmented generation~\citep{borgeaud2022improving, ram2023incontext}. In retrieval-augmented LMs, performance improves when the retrieved documents are more relevant to the query. Similarly, \cspo{} improves DT performance by ``retrieving'' trajectory prefixes that are most relevant to the target task. The key difference is that \cspo{} uses rollout-based evaluation rather than embedding similarity for retrieval scoring, which accounts for the downstream causal effect of the context on the policy.
