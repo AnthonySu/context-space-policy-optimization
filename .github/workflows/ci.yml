@@ -1,0 +1,18 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install torch numpy gymnasium pytest ruff matplotlib
+      - name: Lint
+        run: python -m ruff check src/ tests/ scripts/
+      - name: Test
+        run: python -m pytest tests/ -q --tb=short
+      - name: Smoke test
+        run: python scripts/smoke_test.py
